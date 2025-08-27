@@ -55,3 +55,112 @@ VALUES
     ('Company II', 'Telecommunications', 110.5, 2000, 1, 21, 12, 4.9),
     ('Company JJ', 'Manufacturing', 370.0, 3100, 1, 20, 12, 7.6),
     ('Company KK', 'Healthcare', 150.2, 3400, 0, 16, 8, 5.3);
+
+Analysis:
+
+/* =========================================================
+   SQL Case Study: Do Better Benefits Drive Employee Tenure?
+   ---------------------------------------------------------
+   This project analyzes fake Fortune 500 data to explore:
+   • How benefits (healthcare, PTO, maternity leave) differ by industry
+   • How benefits relate to employee tenure
+   • Revenue per employee as a measure of efficiency
+   Concepts used: WHERE, CASE, GROUP BY, HAVING, arithmetic calculations
+   Relevance: People Analytics / HR Data Analyst
+========================================================= */
+
+-- Intro
+-- In this analysis, I explored how benefits policies (healthcare, PTO, maternity leave)
+-- may relate to retention (average tenure) and business performance.
+-- The goal is to highlight insights relevant for HR/People Analytics and Compliance,
+-- while practicing intermediate SQL techniques.
+
+-- 1. [filter using WHERE with AND, OR, IN, or NOT IN]
+-- 2. [calculation and alias]
+-- 3. [CASE]
+-- 4. [HAVING]
+-- 5. [multi-condition filter]
+
+/* =========================================================
+   Query 1 — Filtering for benefit comparisons
+   Question: Which industries provide both generous PTO and maternity leave weeks?
+   Why: Benchmarks industries leading in employee well-being.
+   SQL concept: WHERE with multiple conditions (AND)
+========================================================= */
+SELECT
+    industry,
+    ROUND(AVG(paid_time_off_days), 2)    AS avg_pto_days,
+    ROUND(AVG(maternity_leave_weeks), 2) AS avg_maternity_weeks
+FROM fortune_companies
+WHERE paid_time_off_days >= 20
+  AND maternity_leave_weeks >= 12
+GROUP BY industry
+ORDER BY avg_pto_days DESC, avg_maternity_weeks DESC;
+
+/* =========================================================
+   Query 2 — Calculations for business efficiency
+   Question: How much revenue does each company generate per employee?
+   Why: Context for weighing benefit costs vs outcomes.
+   SQL concept: arithmetic calc + alias; guard against divide-by-zero
+========================================================= */
+SELECT
+    company_name,
+    industry,
+    ROUND(revenue * 1.0 / employees, 2) AS revenue_per_employee,
+    revenue,
+    employees
+FROM fortune_companies
+WHERE employees > 0                  -- avoid divide-by-zero
+ORDER BY revenue_per_employee DESC;
+
+/* =========================================================
+   Query 3 — Categorizing retention with CASE
+   Question: How can we segment companies into tenure bands?
+   Why: Easier HR storytelling and benchmarking.
+   SQL concept: CASE expression for categorization
+========================================================= */
+SELECT
+    company_name,
+    ROUND(avg_employee_tenure, 2) AS avg_employee_tenure,
+    CASE
+        WHEN avg_employee_tenure < 1 THEN '0–<1 yr'
+        WHEN avg_employee_tenure < 3 THEN '1–<3 yrs'
+        WHEN avg_employee_tenure < 5 THEN '3–<5 yrs'
+        ELSE '5+ yrs'
+    END AS tenure_band
+FROM fortune_companies
+ORDER BY avg_employee_tenure DESC;
+
+/* =========================================================
+   Query 4 — Group analysis with HAVING
+   Question: Which industries have average tenure > 3 years?
+   Why: Surfaces industries with stronger retention.
+   SQL concept: GROUP BY + HAVING on aggregate
+========================================================= */
+SELECT
+    industry,
+    ROUND(AVG(avg_employee_tenure), 2) AS avg_tenure
+FROM fortune_companies
+GROUP BY industry
+HAVING AVG(avg_employee_tenure) > 3
+ORDER BY avg_tenure DESC;
+
+/* =========================================================
+   Query 5 — Companies with strong benefits
+   Question: Which companies offer healthcare, ≥20 PTO days, and ≥12 maternity weeks,
+             and how do they compare on average employee tenure?
+   Why: Benchmarks comprehensive benefits vs retention.
+   SQL concept: multi-condition filter + ordering; tidy output
+========================================================= */
+SELECT
+    company_name,
+    industry,
+    ROUND(avg_employee_tenure, 2) AS avg_employee_tenure
+FROM fortune_companies
+WHERE healthcare_benefits = 1
+  AND paid_time_off_days >= 20
+  AND maternity_leave_weeks >= 12
+ORDER BY avg_employee_tenure DESC
+LIMIT 25;
+
+
