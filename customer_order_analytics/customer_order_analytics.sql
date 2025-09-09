@@ -4,6 +4,15 @@
             electronics dataset (simulated).
    ========================================================= */
 
+/* =========================================================
+   Customer & Order Analytics Project
+   Base + Advanced Questions
+   ========================================================= */
+
+/* ---------------------------------------------------------
+   SECTION 1: Core Customer & Order Analytics 
+   --------------------------------------------------------- */
+
 /* ---------------------------------------------------------
    Q1: How many unique orders were placed in January?
    Business Insight: Establishes baseline order volume to 
@@ -104,3 +113,81 @@ LEFT JOIN BIT_DB.customers AS cust
 WHERE feb.quantity > 2
   AND LENGTH(feb.orderid) = 6 
   AND feb.orderid <> 'Order ID';
+
+/* =========================================================
+   SECTION 2: Advanced Customer & Order Analytics (4.6)
+   ========================================================= */
+
+/* ---------------------------------------------------------
+   Q1: How many of each type of headphones were sold in Feb?
+   --------------------------------------------------------- */
+SELECT
+  Product,
+  SUM(Quantity) AS units_sold
+FROM BIT_DB.FebSales
+WHERE Product LIKE '%Headphones%'
+  AND LENGTH(orderid) = 6
+  AND orderid <> 'Order ID'
+GROUP BY Product
+ORDER BY units_sold DESC;
+
+
+/* ---------------------------------------------------------
+   Q2: Average amount spent per account in February
+   --------------------------------------------------------- */
+SELECT
+  AVG(account_total) AS avg_spend_per_account
+FROM (
+  SELECT
+    cust.acctnum,
+    SUM(feb.quantity * feb.price) AS account_total
+  FROM BIT_DB.FebSales AS feb
+  LEFT JOIN BIT_DB.customers AS cust
+    ON feb.orderid = cust.order_id
+  WHERE LENGTH(feb.orderid) = 6
+    AND feb.orderid <> 'Order ID'
+  GROUP BY cust.acctnum
+) t;
+
+
+/* ---------------------------------------------------------
+   Q3: GA orders with avg PRICE > $1,000 on '04/1%' dates
+   --------------------------------------------------------- */
+SELECT
+  orderID
+FROM BIT_DB.AprSales
+WHERE orderdate LIKE '04/1%'
+  AND location  LIKE '%GA%'
+  AND LENGTH(orderid) = 6
+  AND orderid <> 'Order ID'
+GROUP BY orderID
+HAVING AVG(price) > 1000
+ORDER BY orderID;
+
+
+/* ---------------------------------------------------------
+   Q4: Reverse engineer MaySales to return the 10-row set
+   --------------------------------------------------------- */
+SELECT
+  location,
+  orderID
+FROM BIT_DB.MaySales
+WHERE orderID LIKE '1943_5'
+  AND LENGTH(orderid) = 6
+  AND orderid <> 'Order ID'
+ORDER BY orderID;
+
+
+/* ---------------------------------------------------------
+   Q5: Product with the highest revenue in January
+   --------------------------------------------------------- */
+SELECT
+  product,
+  SUM(quantity * price) AS total_revenue
+FROM BIT_DB.JanSales
+WHERE LENGTH(orderid) = 6
+  AND orderid <> 'Order ID'
+GROUP BY product
+ORDER BY total_revenue DESC
+LIMIT 1;
+
