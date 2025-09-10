@@ -57,6 +57,3 @@ The project answers key business-style questions:
 - **Skill Development:** Use insights on energy/danceability to design training pathways for balanced team skills.  
 - **Encourage Versatility:** Recognize employees who adapt across multiple project types as potential leaders.
 
----
-
-## 📂 Project Structure
