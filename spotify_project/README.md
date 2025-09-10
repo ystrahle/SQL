@@ -4,6 +4,8 @@
 This project analyzes the 2021 Spotify Top 50 dataset, treating **artists as employees** and **tracks as projects**.  
 The goal was to practice SQL skills while framing insights in an **HR/business context**: measuring performance, workload, skills, and versatility.
 
+[spotify_top50_2021.csv](./spotify_top50_2021.csv)
+
 ---
 
 ## ❓ Business Objectives
