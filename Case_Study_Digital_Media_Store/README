@@ -1,0 +1,22 @@
+# Chinook SQL Final Project — Digital Media Store Analytics
+
+## 📌 Project Overview
+This project translates real business questions into SQL using the public **Chinook** database (a digital media store with customers, invoices, tracks, albums, artists, genres, and employees). The goal is to show how an analyst navigates a multi-table schema, chooses the right join paths, and turns queries into business-facing answers (totals, rankings, and lookups).
+
+**What’s covered**
+- Queries that answer 14 core prompts (customers, invoices, sales agents, tracks, artists, genres).
+- Safe date filtering with inclusive/exclusive ranges (e.g., all of 2009).
+- Clean join paths such as **Invoice → Invoice_Items → Tracks → Albums → Artists**.
+- A small “extra” analysis to demonstrate curiosity beyond the prompts.
+
+**Why this matters**
+Rather than focusing on syntax alone, this project emphasizes:
+- **Schema thinking** (where the data lives and how to get to it),
+- **Business context** (what the numbers mean),
+- **Reusability** (readable SQL that another analyst can run and audit).
+
+**Tools**
+- SQLite (Chinook sample database)
+- SQL (ANSI-style queries; minor naming differences may exist across Chinook variants)
+
+> Note: If your Chinook uses different table/column casing (e.g., `InvoiceLine` vs `invoice_items`), adjust identifiers accordingly. The logic and join paths remain the same.
