@@ -1,5 +1,7 @@
 # 🛒 eCommerce Customer & Order Analytics
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 ## 📌 Project Overview
 Customer & order analysis project for an electronics e-commerce business. Provides insights on product sales, customer behavior, and revenue performance.  
 
