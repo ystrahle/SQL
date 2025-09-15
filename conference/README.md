@@ -1,5 +1,7 @@
 # Conference VIP Analysis | People Analytics with SQL
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 ## Executive Summary
 This project analyzes VIP logistics and reviewer assignments for a professional conference. Using SQL, I answered six real-world event management questions to ensure smooth operations and complete data quality. The queries demonstrate **LEFT JOIN, INNER JOIN, multiple JOINs, SELF JOIN, and a subquery** — key SQL skills every analyst uses in practice.
 
