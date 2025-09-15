@@ -2,6 +2,8 @@
 
 Thanks for stopping by! This repository is a collection of SQL projects and practice work that I’ve completed while learning and applying data skills. My goal is to showcase not only technical queries, but also how SQL can be used to solve real-world problems and answer meaningful business questions.  
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 ## 🌟 What you’ll find here
 - Queries for **data exploration & analysis**  
 - Examples of **aggregate functions, joins, and subqueries**  
