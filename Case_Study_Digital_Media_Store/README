@@ -1,22 +1,31 @@
-# Chinook SQL Final Project — Digital Media Store Analytics
+# 🎵 Digital Media Store Sales & Customer Analytics (Chinook SQL Case Study)
 
 ## 📌 Project Overview
-This project translates real business questions into SQL using the public **Chinook** database (a digital media store with customers, invoices, tracks, albums, artists, genres, and employees). The goal is to show how an analyst navigates a multi-table schema, chooses the right join paths, and turns queries into business-facing answers (totals, rankings, and lookups).
+This project analyzes customer purchases, sales performance, and product trends for a **global digital media store**. Using SQL, I explored customer demographics, sales agents’ performance, and product sales patterns to uncover key insights into **revenue drivers** and **market opportunities**.
 
-**What’s covered**
-- Queries that answer 14 core prompts (customers, invoices, sales agents, tracks, artists, genres).
-- Safe date filtering with inclusive/exclusive ranges (e.g., all of 2009).
-- Clean join paths such as **Invoice → Invoice_Items → Tracks → Albums → Artists**.
-- A small “extra” analysis to demonstrate curiosity beyond the prompts.
+The goal was to approach the dataset as if I were supporting a real business, focusing on questions that stakeholders care about:
+- Which customers and regions contribute the most revenue?
+- How do sales agents compare in driving results year over year?
+- What product categories (tracks, genres, media types) are the strongest performers?
 
-**Why this matters**
-Rather than focusing on syntax alone, this project emphasizes:
-- **Schema thinking** (where the data lives and how to get to it),
-- **Business context** (what the numbers mean),
-- **Reusability** (readable SQL that another analyst can run and audit).
+## ❓ Business Objectives
+- Identify **customers outside the US** and highlight opportunities for regional growth.
+- Track **customer segments in Brazil** and analyze their purchasing behavior.
+- Evaluate **sales agents’ contribution** to revenue, including top performers by year.
+- Measure **total sales by year** and compare growth trends across the business.
+- Analyze **product performance** by track, album, genre, and media type.
 
-**Tools**
-- SQLite (Chinook sample database)
-- SQL (ANSI-style queries; minor naming differences may exist across Chinook variants)
+## 💡 Key Insights
+- **International customers** drive significant sales volume outside the US, with Brazil emerging as a notable market.
+- **Sales agents** play a critical role in revenue: performance rotates by year, but in 2009, **Steve Johnson** led with the highest total sales.
+- **Rock and Latin genres** appear frequently in high-volume sales, highlighting strong customer demand.
+- **Track-level analysis** reveals revenue concentration in specific albums and artists, which can inform licensing and marketing strategies.
 
-> Note: If your Chinook uses different table/column casing (e.g., `InvoiceLine` vs `invoice_items`), adjust identifiers accordingly. The logic and join paths remain the same.
+## 🛠️ Tools & Skills
+- **SQL (SQLite)**: Joins, aggregations, CTEs, date filtering, window functions
+- **Schema design thinking**: mapping join paths across 11 related tables
+- **Business analysis**: translating raw queries into stakeholder insights
+
+---
+
+> This case study demonstrates how SQL can be applied to a real-world style dataset to uncover **customer, sales, and product insights**. The emphasis is not only on writing queries but also on **deriving insights that drive business decisions**.
